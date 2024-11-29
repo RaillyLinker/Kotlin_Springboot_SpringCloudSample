@@ -1,0 +1,48 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: time-service2  # Eureka에 등록될 서비스 이름
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # open 할 actuator 경로 설정 (SecurityConfig 에선 actuator/** 허용, ActuatorEndpointFilter 에선 actuator/** IP 제한 설정)
+  endpoint:
+    health:
+      show-details: always # actuator/health 에 디테일 정보 반환
+  info:
+    os:
+      enabled: true
+    java:
+      enabled: true
+    env:
+      enabled: true
+
+info:
+  my-app:
+    any-value: someValue
+    any-value2: someValue2
+  made-by: developerY
+
+eureka:
+  instance:
+    home-page-url: http://localhost:8081  # 서비스의 홈 페이지 URL
+    status-page-url: http://localhost:8081/actuator/health  # 상태 페이지 URL
+    metadata-map:
+      zone: us-east-1  # 서비스가 배포된 지역 정보
+      version: 1.0  # 서비스 버전
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+    hostname: localhost
+    preferIpAddress: false
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 20
+  client:
+    healthcheck:
+      enabled: true  # Eureka 서버로 건강 상태 체크 활성화 여부
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/  # Eureka 서버 URL
