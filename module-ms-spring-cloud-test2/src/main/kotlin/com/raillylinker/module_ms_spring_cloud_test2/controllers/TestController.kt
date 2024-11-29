@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 
 @RestController
 class TestController {
-    @GetMapping("/time-service2/current-time")
+    @GetMapping("/current-time")
     fun getCurrentTime(): String {
         val currentTime = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
         System.out.println(currentTime)

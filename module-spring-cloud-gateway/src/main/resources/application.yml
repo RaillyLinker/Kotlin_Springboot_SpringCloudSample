@@ -13,6 +13,7 @@ spring:
           predicates:
             - Path=/time-service1/**  # "/time-service/**" 경로로 들어오는 요청을 라우팅
           filters:
+            - RewritePath=/time-service1/(?<path>.*),/$\{path}
             - name: "Retry"
               args:
                 retries: 3
@@ -22,6 +23,7 @@ spring:
           predicates:
             - Path=/time-service2/**  # "/time-service/**" 경로로 들어오는 요청을 라우팅
           filters:
+            - RewritePath=/time-service2/(?<path>.*),/$\{path}
             - name: "Retry"
               args:
                 retries: 3
