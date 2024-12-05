@@ -3,7 +3,6 @@ package com.raillylinker.module_ms_spring_cloud_test2
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import java.util.*
@@ -16,7 +15,6 @@ import java.util.*
         ]
 )
 @SpringBootApplication
-@EnableDiscoveryClient
 class MsSpringCloudTest2Main {
     @Bean
     fun init() = CommandLineRunner {
