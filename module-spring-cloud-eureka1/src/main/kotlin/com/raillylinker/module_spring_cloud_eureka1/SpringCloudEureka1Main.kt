@@ -1,4 +1,4 @@
-package com.raillylinker.module_spring_cloud_eureka
+package com.raillylinker.module_spring_cloud_eureka1
 
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -17,7 +17,7 @@ import java.util.*
 )
 @SpringBootApplication
 @EnableEurekaServer
-class SpringCloudEurekaMain {
+class SpringCloudEureka1Main {
     @Bean
     fun init() = CommandLineRunner {
         // 서버 타임존 명시적 설정 (UTC, Asia/Seoul, ...)
@@ -27,5 +27,5 @@ class SpringCloudEurekaMain {
 }
 
 fun main(args: Array<String>) {
-    runApplication<SpringCloudEurekaMain>(*args)
+    runApplication<SpringCloudEureka1Main>(*args)
 }
