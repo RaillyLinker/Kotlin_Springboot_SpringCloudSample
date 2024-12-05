@@ -5,6 +5,7 @@ spring:
   application:
     name: time-service2  # Eureka에 등록될 서비스 이름
 
+# springboot actuator 설정
 management:
   endpoints:
     web:
@@ -21,12 +22,14 @@ management:
     env:
       enabled: true
 
+# springboot actuator info 에 표시될 정보 설정
 info:
   my-app:
     any-value: someValue
     any-value2: someValue2
   made-by: developerY
 
+# eureka 서버에 전달할 정보 설정
 eureka:
   instance:
     home-page-url: http://localhost:8081  # 서비스의 홈 페이지 URL
