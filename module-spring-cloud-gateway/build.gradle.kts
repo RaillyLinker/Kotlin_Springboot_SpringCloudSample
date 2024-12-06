@@ -11,6 +11,10 @@ dependencies {
 
     // (Eureka Client)
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:4.1.4")
+
+    // (Spring Actuator)
+    // : 서버 모니터링 정보
+    implementation("org.springframework.boot:spring-boot-starter-actuator:3.3.5")
 }
 
 dependencyManagement {
