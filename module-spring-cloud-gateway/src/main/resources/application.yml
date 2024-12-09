@@ -9,9 +9,9 @@ spring:
     gateway:
       routes:
         - id: time-service1  # 라우팅 ID
-          uri: lb://TIME-SERVICE1  # Eureka에서 `time-service` 이름으로 서비스를 찾아서 요청을 전달
           predicates:
             - Path=/time-service1/**  # "/time-service/**" 경로로 들어오는 요청을 라우팅
+          uri: lb://TIME-SERVICE1  # Eureka에서 `time-service` 이름으로 서비스를 찾아서 요청을 전달
           filters:
             # 가장 앞의 "/time-service" 를 주소에서 떼고 라우팅
             - RewritePath=/time-service1/(?<path>.*),/$\{path}
@@ -20,10 +20,11 @@ spring:
               args:
                 retries: 3
                 statuses: INTERNAL_SERVER_ERROR
+
         - id: time-service2  # 라우팅 ID
-          uri: lb://TIME-SERVICE2  # Eureka에서 `time-service` 이름으로 서비스를 찾아서 요청을 전달
           predicates:
             - Path=/time-service2/**  # "/time-service/**" 경로로 들어오는 요청을 라우팅
+          uri: lb://TIME-SERVICE2  # Eureka에서 `time-service` 이름으로 서비스를 찾아서 요청을 전달
           filters:
             # 가장 앞의 "/time-service" 를 주소에서 떼고 라우팅
             - RewritePath=/time-service2/(?<path>.*),/$\{path}
@@ -35,7 +36,10 @@ spring:
 
 eureka:
   client:
-    register-with-eureka: true
+    # Eureka Client 로 등록
+    register-with-eureka: false
+    # Eureka 서버에서 레지스트리를 가져올지 여부
     fetch-registry: true
     service-url:
-      defaultZone: http://127.0.0.1:8761/eureka/,http://127.0.0.1:8762/eureka/,http://127.0.0.1:8763/eureka/  # Eureka 서버 URL
+      # Eureka 서버 목록
+      defaultZone: http://127.0.0.1:8761/eureka/,http://127.0.0.1:8762/eureka/,http://127.0.0.1:8763/eureka/

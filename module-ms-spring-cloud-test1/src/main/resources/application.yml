@@ -10,7 +10,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*" # open 할 actuator 경로 설정 (SecurityConfig 에선 actuator/** 허용, ActuatorEndpointFilter 에선 actuator/** IP 제한 설정)
+        include: health, info # open 할 actuator 경로 설정
   endpoint:
     health:
       show-details: always # actuator/health 에 디테일 정보 반환
@@ -24,28 +24,19 @@ management:
 
 # springboot actuator info 에 표시될 정보 설정
 info:
-  my-app:
-    any-value: someValue
-    any-value2: someValue2
-  made-by: developerY
+  made-by: com.rayllylinker
 
 # eureka 서버에 전달할 정보 설정
 eureka:
   instance:
-    home-page-url: http://localhost:8080  # 서비스의 홈 페이지 URL
-    status-page-url: http://localhost:8080/actuator/health  # 상태 페이지 URL
-    metadata-map:
-      zone: us-east-1  # 서비스가 배포된 지역 정보
-      version: 1.0  # 서비스 버전
-    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
     hostname: localhost
-    preferIpAddress: false
-    lease-renewal-interval-in-seconds: 10
-    lease-expiration-duration-in-seconds: 20
   client:
-    healthcheck:
-      enabled: true  # Eureka 서버로 건강 상태 체크 활성화 여부
+    # Eureka Client 로 등록
     register-with-eureka: true
-    fetch-registry: true
+    # Eureka 서버에서 레지스트리를 가져올지 여부
+    fetch-registry: false
+    healthcheck:
+      enabled: true  # Eureka 서버가 /actuator/health 엔드포인트로 상태를 확인
     service-url:
-      defaultZone: http://127.0.0.1:8761/eureka/,http://127.0.0.1:8762/eureka/,http://127.0.0.1:8763/eureka/  # Eureka 서버 URL
+      # Eureka 서버 목록
+      defaultZone: http://127.0.0.1:8761/eureka/,http://127.0.0.1:8762/eureka/,http://127.0.0.1:8763/eureka/

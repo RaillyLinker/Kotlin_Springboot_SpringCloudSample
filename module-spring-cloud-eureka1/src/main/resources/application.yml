@@ -5,16 +5,40 @@ spring:
   application:
     name: eureka-server
 
+# springboot actuator 설정
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info # open 할 actuator 경로 설정
+  endpoint:
+    health:
+      show-details: always # actuator/health 에 디테일 정보 반환
+  info:
+    os:
+      enabled: true
+    java:
+      enabled: true
+    env:
+      enabled: true
+
+# springboot actuator info 에 표시될 정보 설정
+info:
+  made-by: com.rayllylinker
+
 eureka:
   instance:
-    status-page-url-path: /actuator/health  # 상태 페이지 경로
-    health-check-url-path: /actuator/health  # 상태 체크 경로
-    hostname: eureka1
+    hostname: localhost
   client:
-    serviceUrl:
-      defaultZone: http://127.0.0.1:8762/eureka/,http://127.0.0.1:8763/eureka/
+    # Eureka Client 로 등록
     registerWithEureka: true
+    # Eureka 서버에서 레지스트리를 가져올지 여부
     fetchRegistry: true
+    healthcheck:
+      enabled: true  # Eureka 서버가 /actuator/health 엔드포인트로 상태를 확인
+    serviceUrl:
+      # Eureka 서버 목록
+      defaultZone: http://127.0.0.1:8762/eureka/,http://127.0.0.1:8763/eureka/
 #  server:
 #    # Eureka 서버가 "self preservation" 모드를 비활성화합니다.
 #    # 이를 통해 클라이언트가 등록 해제될 때 바로 반영됩니다. (실제 운영 환경에서는 이 설정을 켜두는 것이 좋습니다.)
